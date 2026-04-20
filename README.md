@@ -10,7 +10,7 @@ This project develops a data-driven decision-support framework that predicts NFL
 
 - `Team_Stats_Merge_2018_2025.csv` - Raw merged dataset (256 rows, 121 columns) combining 8 Pro-Football-Reference source tables
 - `Team_Stats_Merge_2018_2025_Data_Dictionary.docx` - Column definitions for the raw dataset
-- `modeling_ready_dataset.csv` - Cleaned, engineered dataset ready for modeling (256 rows, 67 columns)
+- `modeling_ready_dataset.csv` - Cleaned, engineered dataset ready for modeling (256 rows, 68 columns)
 
 ### Code / Notebooks
 
@@ -25,10 +25,15 @@ This project develops a data-driven decision-support framework that predicts NFL
 - `data_preparation.ipynb` - Execution pipeline: variable selection (121 to 60 columns), missing data imputation, outlier documentation, feature engineering (7 differential features), and export
 - `modeling_mm.ipynb` - Full modeling pipeline: expanding window setup, baseline models, Logistic Regression, Random Forest, Gradient Boosting, cross-model comparison, and diagnostic plots
 
+**Assignment 3 (Evaluation and Final Report)**
+
+- `score_pct_diff_analysis.ipynb` - Sensitivity analysis addressing Assignment 2 feedback: re-runs Logistic Regression pipeline with and without score_pct_diff to verify feature is not inflating performance
+
 ### Reports
 
 - `Assignment_1_-_Business_Phase_-_Completed_Written_Report.docx` - Assignment 1 written report
 - `Assignment_2_Final.docx` - Assignment 2 written report (Data Preparation and Modeling)
+- `Assignment_3_Final_Report.pdf` - Assignment 3 written report (Evaluation, Organizational Interpretation, Project Retrospective)
 
 ### Plot Outputs
 
@@ -53,6 +58,7 @@ pip install -r requirements.txt
 1. **feature_selection_analysis.ipynb** - Run first to see the analytical evidence behind variable selection decisions
 2. **data_preparation.ipynb** - Run second to produce `modeling_ready_dataset.csv`
 3. **modeling_mm.ipynb** - Run third to train models and generate results and plots
+4. **score_pct_diff_analysis.ipynb** - Run fourth (requires `modeling_ready_dataset.csv` from step 2). Sensitivity analysis comparing model performance with and without score_pct_diff
 
 Note: `build_team_season_master.ipynb` and `eda_analysis.ipynb` are Assignment 1 notebooks included for completeness. The Assignment 2 pipeline starts from `Team_Stats_Merge_2018_2025.csv` which was produced by the Assignment 1 build script.
 
@@ -64,6 +70,7 @@ Note: `build_team_season_master.ipynb` and `eda_analysis.ipynb` are Assignment 1
 - Scoring efficiency differential (r = +0.704) emerged as the single strongest predictor
 - Defensive quality metrics (air yards allowed, yards after catch) were the strongest linear predictors
 - On the 2025 final holdout, Logistic Regression correctly classified 30 of 32 teams (93.8% accuracy)
+- Sensitivity analysis confirmed score_pct_diff does not artificially inflate results: removing it changes AUC from 0.970 to 0.967 (cross-validation) and 0.984 to 0.980 (2025 holdout), with identical misclassifications
 
 ## Target Variable
 
